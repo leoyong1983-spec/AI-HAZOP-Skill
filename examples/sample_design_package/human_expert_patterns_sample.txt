@@ -1,0 +1,7 @@
+Human expert pattern sample:
+
+HAZOP worksheet includes node description, design intent, drawing number, guideword, cause, consequence, safeguards, inherent risk, residual risk, recommendation, discussion, and responsible party.
+High-risk summary includes III/IV risk scenarios for LNG unloading, BOG return, ship-shore ESD, and closed LNG liquid sections.
+Review comments require checking whether SIS cause-and-effect actions are covered by HAZOP and whether new ESD/XV valves need HAZOP and SIL screening.
+Recommendation table tracks cause, consequence, existing safeguards, recommendation type, technical basis, close-out opinion, planned completion time, and responsible party.
+Potential expert questions include check-valve bypass reverse flow and liquid hammer, liquid nitrogen pre-cooling into LNG lines, blind flange nitrogen purging, vapor return valves not allowed to open simultaneously, and fail-safe FC/FO/FL valve position consistency.

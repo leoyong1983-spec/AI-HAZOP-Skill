@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+_scratch*/
+hazop_review_output/
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+*.tmp
+~$*

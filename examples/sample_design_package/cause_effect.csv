@@ -1,0 +1,4 @@
+Cause,Effect,Notes
+LAHH-101 on TK-101,Close ESDV-101 and stop unloading pump,High-high level action to be confirmed
+GD-101 gas detection,Alarm and ESD in unloading area,Detector voting not defined
+K-301 trip,Open BOG vent path,Flare capacity reference not included

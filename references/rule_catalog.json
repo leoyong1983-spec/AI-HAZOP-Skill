@@ -1,0 +1,629 @@
+{
+  "version": "0.3.0",
+  "practice_sources": [
+    {
+      "label": "OSHA 29 CFR 1910.119(e) Process Hazard Analysis",
+      "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.119",
+      "borrowed": "PHA should address prior incidents, engineering/administrative controls, consequences of control failures, facility siting, human factors, and qualitative evaluation of safeguard effects."
+    },
+    {
+      "label": "EPA 40 CFR 68.67 Process Hazard Analysis",
+      "url": "https://www.ecfr.gov/current/title-40/chapter-I/subchapter-C/part-68/subpart-D/section-68.67",
+      "borrowed": "PHA should cover natural hazards, power loss, siting, human factors, safer technology alternatives, and prompt resolution/documentation of findings."
+    },
+    {
+      "label": "IEC 61882:2016 HAZOP application guide",
+      "url": "https://webstore.iec.ch/en/publication/24321",
+      "borrowed": "Use systematic guideword review with explicit preparation, examination, documentation, and follow-up boundaries."
+    },
+    {
+      "label": "PHMSA 49 CFR Part 193 LNG facilities",
+      "url": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-I/subchapter-D/part-193",
+      "borrowed": "For LNG, emphasize siting, impoundment, control systems, emergency shutdown, fire protection, and operating/maintenance procedures."
+    },
+    {
+      "label": "SIGTTO LNG ship-shore ESD linked systems guidance",
+      "url": "https://www.sigtto.org/",
+      "borrowed": "For LNG transfer, explicitly check ship-shore link, ESD timing, emergency release, communication loss, and testing/override management."
+    },
+    {
+      "label": "AI-assisted HAZOP research and preHAZOP practice",
+      "url": "https://github.com/TUDoAD/preHAZOP",
+      "borrowed": "Keep AI output evidence-linked, node/design-intent oriented, and subject to human expert challenge rather than automatic acceptance."
+    },
+    {
+      "label": "Safety Science 2026 LLM HAZOP evaluation",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0925753525002644",
+      "borrowed": "Treat LLM HAZOP output as a supportive draft because scenario validity can be limited and generated safeguards can over-weight procedural measures."
+    },
+    {
+      "label": "Local RuDong LNG human HAZOP/SIL report package",
+      "url": "",
+      "borrowed": "Learn reusable expert-report patterns: node-based worksheet structure, high-risk scenario summary, review-comment closure, HAZOP-to-SIL traceability, C&E coverage, interface accident impact, and engineering-action quality."
+    }
+  ],
+  "required_document_types": [
+    {
+      "type": "design_basis",
+      "label": "设计基础/设计依据",
+      "priority": "high",
+      "why": "HAZOP节点意图、操作包络和适用标准需要设计基础支撑。",
+      "question": "请设计方确认设计基础文件、适用标准清单、装置边界和工况包络是否已提交；若未提交，哪些HAZOP节点的设计意图会受影响？"
+    },
+    {
+      "type": "pfd",
+      "label": "PFD/工艺流程图",
+      "priority": "critical",
+      "why": "PFD用于确认工艺路径、主物流、循环、放空和公用工程边界。",
+      "question": "请补充或定位最新PFD，并说明每个HAZOP节点的设计意图、正常流量/压力/温度/组成依据来自哪一版文件。"
+    },
+    {
+      "type": "pid",
+      "label": "P&ID/管道仪表流程图",
+      "priority": "critical",
+      "why": "P&ID是HAZOP节点边界、隔离、联锁、报警、泄压、排放和人工操作的主要证据。",
+      "question": "请确认HAZOP使用的P&ID版本、红线状态和节点划分；若未提供，会议无法逐节点核查偏离、原因、后果和保护层。"
+    },
+    {
+      "type": "equipment_list",
+      "label": "设备表/设备数据表",
+      "priority": "high",
+      "why": "设备设计压力、温度、材质、容积、接口和限制条件影响偏离后果和保护措施。",
+      "question": "请提供设备表或关键设备数据表，并说明设备设计条件与P&ID、工艺包络是否一致。"
+    },
+    {
+      "type": "line_list",
+      "label": "管线表",
+      "priority": "high",
+      "why": "管线设计压力、温度、材质、介质、保冷/伴热和试验要求影响泄漏、热胀、反流、堵塞等问题。",
+      "question": "请提供管线表，并重点说明低温、两相、放空、排凝、小口径旁路和可能被切断管段的设计条件。"
+    },
+    {
+      "type": "instrument_index",
+      "label": "仪表索引/报警联锁清单",
+      "priority": "high",
+      "why": "报警、控制阀、ESD阀、SIS仪表和设定值是识别保护层可信度的基础。",
+      "question": "请提供仪表索引、报警/联锁设定值和测点安装依据；哪些报警或联锁仍为待定值？"
+    },
+    {
+      "type": "cause_effect",
+      "label": "因果矩阵/C&E/ESD逻辑",
+      "priority": "high",
+      "why": "HAZOP专家需要核查探测、报警、联锁、阀位、停机、泄压、放空和复位的动作链。",
+      "question": "请提供最新因果矩阵，并逐项说明ESD、FGS、SIS、设备保护和公用工程失效的动作顺序。"
+    },
+    {
+      "type": "control_philosophy",
+      "label": "控制哲学/操作说明",
+      "priority": "medium",
+      "why": "控制回路、启动/停车、旁路、手自动切换和异常处置影响可操作性。",
+      "question": "请说明控制哲学、启动停车程序和异常工况处置文件是否可用于HAZOP讨论，特别是旁路和复位条件。"
+    },
+    {
+      "type": "relief_flare",
+      "label": "泄压/放空/火炬或排放研究",
+      "priority": "high",
+      "why": "高压、火灾、热膨胀、控制阀失效、压缩机跳车等偏离需要泄放能力和排放去向证据。",
+      "question": "请提供泄压/放空设计依据，列明PSV/PRV/热膨胀阀覆盖的工况、排放去向和未覆盖的封闭液段。"
+    },
+    {
+      "type": "hazardous_area",
+      "label": "危险区域划分/防爆图",
+      "priority": "medium",
+      "why": "可燃气泄漏、通风、探测器布置和点火源控制需要与设备布置一致。",
+      "question": "请提供危险区域划分和防爆设备选型依据，并说明其与泄漏源清单、通风和F&G布置是否一致。"
+    },
+    {
+      "type": "layout",
+      "label": "总图/设备布置/排液围堰",
+      "priority": "medium",
+      "why": "设备间距、泄漏汇集、冷液排放、逃生路线和消防可达性是后果控制证据。",
+      "question": "请提供总图、设备布置、排液/围堰/集液池和逃生消防通道图，说明关键泄漏场景的收集与隔离路径。"
+    },
+    {
+      "type": "incident_history",
+      "label": "既往事故/未遂事件/经验反馈",
+      "priority": "medium",
+      "why": "法规型PHA实践要求考虑以往可能造成灾难性后果的事故；扩建项目还应关注同类站场、既有装置和供应商包的经验反馈。",
+      "question": "请提供本项目、既有接收站、同类LNG站场和关键设备包的事故/未遂事件/经验反馈清单；哪些经验需要转化为HAZOP偏离或专家追问？"
+    },
+    {
+      "type": "moc_pssr",
+      "label": "MOC/PSSR/投产前安全审查",
+      "priority": "high",
+      "why": "扩建、切改和投产状态需要证明变更边界、临时措施和开车前安全条件已被系统识别。",
+      "question": "请提供MOC、PSSR或投产前安全审查资料，说明新老系统接口、临时旁路、逻辑修改和未完成项如何进入HAZOP讨论。"
+    },
+    {
+      "type": "operating_procedure",
+      "label": "操作规程/启动停车/异常处置",
+      "priority": "high",
+      "why": "操作模式、人因、手自动切换、报警响应和异常处置会影响偏离原因、后果和保护层可信度。",
+      "question": "请提供启动、停车、预冷、卸船、气化外输、BOG处理、应急停车和异常恢复程序；哪些步骤依赖人工判断或现场手动操作？"
+    },
+    {
+      "type": "emergency_response",
+      "label": "应急响应/消防/疏散资料",
+      "priority": "medium",
+      "why": "HAZOP专家需要核查探测、隔离、消防、撤离、应急通信和外部协同是否能支撑重大泄漏或火灾场景。",
+      "question": "请提供应急预案、消防系统说明、疏散路线、报警通信和演练记录；LNG冷泄漏、可燃云、池火、喷射火等场景的响应边界是什么？"
+    },
+    {
+      "type": "natural_hazard",
+      "label": "自然灾害/外部事件设计依据",
+      "priority": "medium",
+      "why": "LNG接收站常受台风、风暴潮、洪水、地震、雷电和外部船舶/邻近装置影响，这些场景会改变失效原因和后果。",
+      "question": "请提供自然灾害和外部事件设计依据，说明台风、风暴潮、洪水、地震、雷电、停电、外部火灾或船舶碰撞是否作为HAZOP触发原因讨论。"
+    },
+    {
+      "type": "facility_siting",
+      "label": "设施选址/人员暴露/建筑物风险",
+      "priority": "medium",
+      "why": "设施选址、控制室/办公楼/公众敏感点和相邻装置暴露会影响泄漏、火灾、爆炸和有毒/窒息风险后果判断。",
+      "question": "请提供设施选址、人员分布、建筑物风险、公众敏感点和相邻装置接口资料；哪些重大泄漏或火灾场景可能影响有人建筑或外部边界？"
+    }
+  ],
+  "rules": [
+    {
+      "id": "GEN-FLOW-001",
+      "topic": "流量偏离与反流",
+      "priority": "high",
+      "guidewords": ["No flow", "More flow", "Less flow", "Reverse flow"],
+      "any_keywords": ["flow", "流量", "反流", "backflow", "non-return", "check valve", "止回", "bypass", "旁路", "transfer", "输送"],
+      "concern": "流量中断、过量、偏低或反向流动可能造成设备超压、泵汽蚀、误混、储罐液位异常或下游失供。",
+      "questions": [
+        "哪些管段存在反流或误开旁路可能？止回阀、双阀隔离或联锁关闭是否在P&ID和C&E中一致体现？",
+        "泵/压缩机跳车、阀门误关、过滤器堵塞、下游ESD关闭时，流量偏离的报警、联锁和泄压路径是什么？",
+        "是否有最小流量、回流、暖线或预冷流量要求？这些要求是否进入操作程序和控制逻辑？"
+      ],
+      "requested_evidence": ["P&ID", "管线表", "泵/压缩机数据表", "控制哲学", "因果矩阵"]
+    },
+    {
+      "id": "GEN-PRESS-001",
+      "topic": "压力偏离与泄压覆盖",
+      "priority": "critical",
+      "guidewords": ["High pressure", "Low pressure", "Vacuum"],
+      "any_keywords": ["pressure", "压力", "PSV", "PRV", "relief", "vent", "flare", "真空", "vacuum", "blocked", "封闭", "thermal expansion", "热膨胀"],
+      "concern": "高压、低压或真空偏离需要明确设计压力、泄压路径、放空去向、热膨胀保护和设备真空保护。",
+      "questions": [
+        "每个可隔离液相管段是否识别了热膨胀工况？热泄放阀排向何处，是否会导致二次低温/可燃风险？",
+        "控制阀失效、下游阀关断、火灾、外部热输入、压缩机/泵跳车等工况是否纳入泄压设计？",
+        "设备低压或真空场景是否有补气、真空破坏、联锁停车或机械设计能力证据？"
+      ],
+      "requested_evidence": ["泄压计算书", "PSV/PRV清单", "P&ID", "设计压力温度表", "火炬/放空系统研究"]
+    },
+    {
+      "id": "GEN-CONTROL-001",
+      "topic": "控制、报警、联锁和旁路",
+      "priority": "high",
+      "guidewords": ["Control failure", "Late action", "Other than intended"],
+      "any_keywords": ["alarm", "报警", "interlock", "联锁", "SIS", "ESD", "trip", "shutdown", "bypass", "override", "旁路", "复位", "reset"],
+      "concern": "报警和联锁若缺少设定值、动作顺序、旁路管理和复位条件，保护层可信度无法判断。",
+      "questions": [
+        "关键报警/联锁的设定值、延时、投用条件、旁路审批和复位条件是否明确？",
+        "C&E矩阵与P&ID、仪表索引、控制哲学是否存在阀位、动作对象或停机范围不一致？",
+        "报警是否只是提示操作员，还是可作为独立保护层？操作员响应时间和操作路径有没有依据？"
+      ],
+      "requested_evidence": ["C&E矩阵", "仪表索引", "报警联锁清单", "控制哲学", "SIL/LOPA资料"]
+    },
+    {
+      "id": "GEN-MAINT-001",
+      "topic": "检维修、隔离和临时状态",
+      "priority": "medium",
+      "guidewords": ["Maintenance", "Startup", "Shutdown", "Wrong sequence"],
+      "any_keywords": ["maintenance", "检修", "isolation", "隔离", "blind", "盲板", "startup", "开车", "shutdown", "停车", "commissioning", "投产", "tie-in", "切改"],
+      "concern": "检维修隔离、开停车、投产切换和临时旁路常引入非正常路径、残液残压和误操作风险。",
+      "questions": [
+        "开车、停车、预冷、置换、隔离、排凝、复位步骤是否覆盖到HAZOP节点？",
+        "检维修盲板、双隔断泄放、残压/残液确认和误开阀门防护是否在P&ID或程序中体现？",
+        "扩建或改造项目的tie-in、临时管线、临时旁路和既有装置不停产条件是否单独评审？"
+      ],
+      "requested_evidence": ["操作程序", "检维修隔离方案", "盲板表", "投产方案", "切改方案"]
+    },
+    {
+      "id": "LNG-CRYO-001",
+      "topic": "LNG/低温材料和冷泄漏",
+      "priority": "critical",
+      "signals": ["lng", "cryogenic"],
+      "guidewords": ["Low temperature", "Leak", "Other than intended"],
+      "any_keywords": ["LNG", "液化天然气", "低温", "cryogenic", "cold", "保冷", "spill", "泄漏", "embrittlement", "脆裂", "不锈钢", "9%Ni"],
+      "concern": "LNG低温泄漏可能造成材料脆裂、冷云团、低温灼伤、设备基础/电缆/碳钢结构损伤和排液收集能力不足。",
+      "questions": [
+        "低温边界、材质转变点和可能被冷喷淋/冷池影响的碳钢结构是否已识别？",
+        "冷泄漏排液路径、集液池/围堰、地坪坡度、雨水系统隔离和低温适用性是否有布置图证据？",
+        "保冷失效、阀门填料泄漏、法兰泄漏和小口径支管断裂是否纳入低温后果讨论？"
+      ],
+      "requested_evidence": ["低温材料规格", "管线表", "设备布置图", "排液/围堰图", "冷泄漏后果分析"]
+    },
+    {
+      "id": "LNG-THERMAL-RELIEF-001",
+      "topic": "LNG封闭液段热膨胀泄放",
+      "priority": "critical",
+      "signals": ["lng", "cryogenic"],
+      "guidewords": ["High pressure", "Blocked-in", "Temperature increase"],
+      "any_keywords": ["blocked-in", "封闭", "thermal relief", "热泄放", "thermal expansion", "热膨胀", "LNG", "液相", "liquid"],
+      "concern": "LNG或低温液体被双阀隔离后受热会快速升压，必须确认每个可封闭液段都有可靠泄压路径和安全排放去向。",
+      "questions": [
+        "P&ID和管线表是否逐段标识所有可能被双阀隔离的LNG/低温液相管段？",
+        "热泄放阀尺寸、设定压力、排放去向和下游背压是否有计算依据？",
+        "热泄放排向低压系统、放空或回收系统时，是否会引起下游超压、低温冲击或可燃云风险？"
+      ],
+      "requested_evidence": ["热泄放阀清单", "泄压计算书", "P&ID", "管线表", "放空系统能力核算"]
+    },
+    {
+      "id": "LNG-TANK-001",
+      "topic": "LNG储罐液位、压力和BOG",
+      "priority": "critical",
+      "signals": ["lng"],
+      "guidewords": ["High level", "Low level", "High pressure", "Vacuum", "Composition change"],
+      "any_keywords": ["tank", "储罐", "full containment", "BOG", "boil-off", "rollover", "翻滚", "stratification", "分层", "LAHH", "高高液位", "vacuum"],
+      "concern": "LNG储罐高液位、真空/超压、分层翻滚、BOG处理能力不足和仪表失效会影响重大事故后果。",
+      "questions": [
+        "储罐高高液位动作、进料切断、再循环/回流限制和操作员响应是否在C&E和操作程序中一致？",
+        "BOG压缩机跳车、下游限制、再冷凝或放空能力不足时，储罐压力保护链如何动作？",
+        "分层/翻滚监测、组分变化、密度/温度剖面和最大接收速率是否有操作限制？"
+      ],
+      "requested_evidence": ["储罐数据表", "BOG系统说明", "C&E矩阵", "储罐操作程序", "安全阀/真空阀资料"]
+    },
+    {
+      "id": "LNG-TRANSFER-001",
+      "topic": "LNG卸船/装卸车/输送ESD",
+      "priority": "high",
+      "signals": ["lng"],
+      "guidewords": ["No flow", "Reverse flow", "Leak", "Wrong sequence"],
+      "any_keywords": ["unloading", "卸船", "loading arm", "卸料臂", "ship", "码头", "truck", "槽车", "ESD", "ERC", "breakaway", "return gas", "返气"],
+      "concern": "LNG装卸需要核查转输路径、返气、紧急切断、释放耦合、臂位/船岸信号和误顺序操作。",
+      "questions": [
+        "船岸/车站ESD信号、阀门关闭顺序、泵停机、卸料臂紧急释放和返气切断是否有统一时序？",
+        "误开阀、未预冷、返气不足、卸料臂位移、软管/臂泄漏和船岸通信丢失时的动作是什么？",
+        "ESD关闭是否会造成液锤、热膨胀封闭段或上游设备超压？"
+      ],
+      "requested_evidence": ["装卸P&ID", "船岸/车站ESD逻辑", "卸料臂/软管资料", "操作程序", "液锤/瞬态分析"]
+    },
+    {
+      "id": "LNG-BOG-001",
+      "topic": "BOG压缩、回收和放空",
+      "priority": "high",
+      "signals": ["lng"],
+      "guidewords": ["No compression", "High pressure", "Low temperature", "Reverse flow"],
+      "any_keywords": ["BOG", "boil-off", "压缩机", "compressor", "recondenser", "再冷凝", "flare", "放空", "vent"],
+      "concern": "BOG系统失效可能导致储罐压力升高、放空负荷增加、低温气体进入非低温系统或压缩机喘振/反转。",
+      "questions": [
+        "BOG压缩机跳车、喘振、出口阀关、下游再冷凝/外输受限时，压力控制和放空路径如何动作？",
+        "BOG系统与储罐压力保护、火炬/放空能力、低温材料边界是否一致？",
+        "压缩机最小流量、回流、密封气、冷态启动和防反转措施是否进入HAZOP节点？"
+      ],
+      "requested_evidence": ["BOG系统P&ID", "压缩机数据表", "控制哲学", "放空能力核算", "C&E矩阵"]
+    },
+    {
+      "id": "LNG-VAPORIZER-001",
+      "topic": "气化器与外输气质量",
+      "priority": "high",
+      "signals": ["lng"],
+      "guidewords": ["Low temperature", "High pressure", "No utility", "Off-spec"],
+      "any_keywords": ["vaporizer", "气化器", "ORV", "SCV", "IFV", "外输", "sendout", "seawater", "海水", "glycol", "乙二醇", "hydrate", "水合物"],
+      "concern": "气化器公用工程失效、管泄漏、低温外输、超压和组分/热值偏离会影响下游管网和设备完整性。",
+      "questions": [
+        "气化器出口低温、低热值/高热值、压力偏离和公用工程失效的报警联锁是什么？",
+        "海水/热媒/燃烧系统异常、冻结/水合物、管束泄漏和下游阀关断是否纳入保护逻辑？",
+        "外输气温度、压力、组分和加臭/计量边界是否有明确设计和操作限制？"
+      ],
+      "requested_evidence": ["气化器数据表", "外输系统P&ID", "控制哲学", "C&E矩阵", "外输气质量要求"]
+    },
+    {
+      "id": "LNG-FG-001",
+      "topic": "可燃气/火焰探测与危险区域",
+      "priority": "high",
+      "signals": ["lng"],
+      "guidewords": ["Leak", "Ignition", "Detection failure"],
+      "any_keywords": ["gas detector", "可燃气", "FGS", "fire and gas", "flame detector", "火焰探测", "hazardous area", "防爆", "ventilation", "通风"],
+      "concern": "泄漏探测、火焰探测、危险区域划分和通风若与泄漏源或布置不一致，会削弱早期发现和点火源控制。",
+      "questions": [
+        "可燃气探测器、低温探测、火焰探测和手报布置是否覆盖主要泄漏源、通风死角和低点聚集区？",
+        "危险区域划分是否与释放源清单、通风条件、设备布置和电气防爆等级一致？",
+        "FGS动作是报警、ESD、消防启动还是局部停机？动作范围和误报警策略是否明确？"
+      ],
+      "requested_evidence": ["F&G布置图", "危险区域划分图", "释放源清单", "C&E矩阵", "通风计算"]
+    },
+    {
+      "id": "BROWNFIELD-EXP-001",
+      "topic": "扩建项目接口和不停产切改",
+      "priority": "high",
+      "guidewords": ["Other than intended", "Wrong sequence", "Interface failure"],
+      "any_keywords": ["扩建", "改造", "existing", "brownfield", "tie-in", "interface", "接口", "切改", "simultaneous", "SIMOPS", "不停产", "投产"],
+      "concern": "扩建项目的接口、切改、临时状态和新老系统设计基准差异常常是HAZOP专家应重点追问的问题。",
+      "questions": [
+        "新老系统接口的设计压力、设计温度、材料等级、控制/ESD边界和放空能力是否逐项比对？",
+        "切改、投产、临时旁路、临时盲板和SIMOPS条件是否有独立HAZOP/风险评估？",
+        "扩建后最大/最小工况是否改变既有设备、储罐、BOG、火炬、消防和外输系统能力假设？"
+      ],
+      "requested_evidence": ["接口清单", "切改方案", "SIMOPS方案", "新老系统能力核算", "投产程序"]
+    },
+    {
+      "id": "PHA-INCIDENT-001",
+      "topic": "既往事故和未遂事件经验转化",
+      "priority": "medium",
+      "guidewords": ["Experience feedback", "Repeat event", "Known hazard"],
+      "any_keywords": ["incident", "near miss", "lesson learned", "accident", "事故", "未遂", "险情", "经验反馈", "事故教训"],
+      "concern": "HAZOP若未系统吸收既往事故、未遂事件、同类装置经验和供应商包经验，容易重复已知失效模式。",
+      "questions": [
+        "本项目、既有站场、同类LNG接收站和关键设备包的事故/未遂事件清单是否已分配到相关HAZOP节点？",
+        "事故经验中涉及的失效原因、报警响应、联锁缺陷、维护错误和临时旁路是否被转化为导向词问题？",
+        "哪些以往事件只在培训或经验反馈中出现，但尚未反映到P&ID、C&E、操作规程或检维修制度？"
+      ],
+      "requested_evidence": ["事故/未遂事件清单", "经验反馈关闭记录", "同类装置事故案例", "设计变更记录", "操作/维护制度更新记录"]
+    },
+    {
+      "id": "PHA-HUMAN-001",
+      "topic": "人因、报警负荷和手动响应可信度",
+      "priority": "high",
+      "guidewords": ["Human factors", "Late action", "Wrong action"],
+      "any_keywords": ["operator", "manual", "human", "alarm", "reset", "bypass", "override", "操作员", "人工", "手动", "报警", "复位", "旁路"],
+      "concern": "把人工响应、现场手动阀、报警确认或旁路管理当作保护层时，需要说明可见性、时间裕量、可达性、培训和误操作控制。",
+      "questions": [
+        "关键场景中操作员需要在多长时间内完成哪些动作？报警数量、画面导航、现场可达性和PPE条件是否支持这个响应时间？",
+        "哪些保护层依赖手动阀、现场确认、电话沟通或班组经验？这些措施是否足以作为独立保护层，还是只能作为辅助措施？",
+        "旁路、强制、复位、屏蔽、维护模式和临时操作的审批、时限、提醒和恢复检查是否明确？"
+      ],
+      "requested_evidence": ["报警清单", "操作程序", "控制室画面/报警管理文件", "旁路管理制度", "培训和演练记录"]
+    },
+    {
+      "id": "PHA-SITING-001",
+      "topic": "设施选址、人员暴露和建筑物风险",
+      "priority": "high",
+      "guidewords": ["Facility siting", "Exposure", "Escalation"],
+      "any_keywords": ["facility siting", "occupied building", "public receptor", "building risk", "plot plan", "设施选址", "人员密集", "公众敏感点", "建筑物", "控制室", "总图"],
+      "concern": "泄漏、火灾、爆炸、低温云团或窒息场景的后果不仅取决于设备，还取决于人员分布、建筑物抗爆/耐火、逃生路径和外部边界。",
+      "questions": [
+        "控制室、机柜间、办公楼、值班室、承包商临设和公众敏感点是否纳入重大泄漏/火灾/爆炸后果讨论？",
+        "总图、风向、地形、围堰/排液、逃生路线、消防可达性和相邻装置连锁升级路径是否一致？",
+        "扩建后新增设备是否改变既有建筑物风险、人员暴露、疏散时间或外部边界影响？"
+      ],
+      "requested_evidence": ["设施选址研究", "建筑物风险评估", "人员分布图", "总图/疏散图", "后果分析"]
+    },
+    {
+      "id": "PHA-NATURAL-001",
+      "topic": "自然灾害和外部事件触发偏离",
+      "priority": "medium",
+      "guidewords": ["External event", "Loss of containment", "Loss of utility"],
+      "any_keywords": ["natural hazard", "flood", "storm surge", "typhoon", "earthquake", "lightning", "ship collision", "自然灾害", "洪水", "台风", "风暴潮", "地震", "雷电", "船舶碰撞"],
+      "concern": "自然灾害和外部事件可能同时造成多套保护层失效、停电、通信中断、消防受限、围堰淹没或船岸接口异常。",
+      "questions": [
+        "台风、风暴潮、洪水、地震、雷电、外部火灾、船舶碰撞和邻近装置事故是否作为偏离原因进入相关节点？",
+        "自然灾害场景下是否仍能维持ESD、FGS、备用电源、通信、消防水、排液隔离和人员撤离？",
+        "设计基准外事件的保守边界是什么？哪些假设需要在HAZOP会议上请土建、总图、消防或业主确认？"
+      ],
+      "requested_evidence": ["自然灾害设计依据", "外部事件评估", "备用电源/通信方案", "应急预案", "总图与排水资料"]
+    },
+    {
+      "id": "PHA-UTILITY-001",
+      "topic": "公用工程和备用能力失效",
+      "priority": "high",
+      "guidewords": ["No utility", "Partial utility", "Common cause failure"],
+      "any_keywords": ["utility", "power failure", "standby power", "backup power", "instrument air", "nitrogen", "cooling water", "UPS", "公用工程", "停电", "备用电源", "仪表风", "氮气", "冷却水"],
+      "concern": "停电、UPS失效、仪表风/氮气/冷却水/海水/消防水失效可能成为多节点共同原因，导致多个保护层同时不可用。",
+      "questions": [
+        "全厂停电、局部停电、UPS耗尽、仪表风失效、氮气失效、冷却/海水失效时，阀门失效位置和设备停机顺序是否明确？",
+        "备用电源、应急柴油机、UPS、仪表风缓冲罐和消防水能力是否覆盖ESD后安全状态所需时间？",
+        "公用工程失效是否会同时影响探测、联锁、放空、消防、通信和操作员响应？有没有共同原因失效分析？"
+      ],
+      "requested_evidence": ["公用工程P&ID", "电气单线图", "UPS/备用电源资料", "阀门失效位置清单", "C&E矩阵"]
+    },
+    {
+      "id": "PHA-MOC-PSSR-001",
+      "topic": "MOC/PSSR和投产切换状态",
+      "priority": "high",
+      "guidewords": ["Change", "Startup", "Temporary operation"],
+      "any_keywords": ["MOC", "management of change", "PSSR", "pre-startup", "commissioning", "startup", "变更管理", "开车前安全审查", "投产", "试车"],
+      "concern": "扩建或改造的临时状态、逻辑修改、未完成项和投产切换经常不在稳态P&ID中完整体现。",
+      "questions": [
+        "哪些HAZOP节点受MOC、临时旁路、软件逻辑修改、临时盲板、临时电源或施工隔离影响？",
+        "PSSR是否检查了图纸一致性、联锁测试、报警设定、泄压路径、操作程序、培训和未完成项管理？",
+        "投产/切换期间是否存在与正常运行不同的阀位、联锁旁路、人员配置、通信方式或应急资源？"
+      ],
+      "requested_evidence": ["MOC清单", "PSSR清单", "投产/试车方案", "临时旁路/盲板表", "联锁测试记录"]
+    },
+    {
+      "id": "PHA-EMERGENCY-001",
+      "topic": "应急响应和消防边界",
+      "priority": "medium",
+      "guidewords": ["Emergency response", "Mitigation failure", "Delayed response"],
+      "any_keywords": ["emergency response", "firewater", "fire protection", "drill", "evacuation", "应急预案", "消防", "演练", "疏散", "泡沫", "水幕"],
+      "concern": "HAZOP专家不替代应急评估，但需要追问探测、隔离、消防、疏散、通信和外部支援是否能支撑重大场景。",
+      "questions": [
+        "LNG冷泄漏、可燃云、池火、喷射火、控制室受影响和码头事故的探测-报警-隔离-消防-疏散链条是否完整？",
+        "消防水、泡沫/干粉、水幕、消防通道、应急通信和外部消防协同是否覆盖扩建后最大可信场景？",
+        "夜间、台风、停电、通信中断、道路受阻或同时多点报警时，应急响应假设是否仍成立？"
+      ],
+      "requested_evidence": ["应急预案", "消防系统说明", "F&G布置图", "演练记录", "最大可信事故后果分析"]
+    },
+    {
+      "id": "PHA-ACTION-QUALITY-001",
+      "topic": "HAZOP行动项质量和可关闭性",
+      "priority": "low",
+      "guidewords": ["Recommendation quality", "Close-out"],
+      "any_keywords": ["recommendation", "action item", "close-out", "tracking", "整改", "建议项", "行动项", "关闭"],
+      "concern": "参会专家可以提醒行动项是否具体、可验证、能闭环；但不替主席关闭行动项。",
+      "questions": [
+        "拟形成的行动项是否明确责任专业、需提交的证据、完成判据和影响节点？",
+        "行动项是否避免了“进一步研究/加强管理”这类不可验证表述？是否说明要修改图纸、计算、逻辑、程序还是培训？",
+        "对高后果场景，行动项是否优先考虑消除/替代、工程控制或被动/主动保护，而不是只依赖操作管理？"
+      ],
+      "requested_evidence": ["HAZOP行动项台账", "整改关闭证据", "设计修改记录", "计算书/图纸修订", "程序和培训记录"]
+    },
+    {
+      "id": "AI-REVIEW-001",
+      "topic": "AI输出证据化和反驳复核",
+      "priority": "low",
+      "guidewords": ["AI limitation", "Evidence challenge"],
+      "any_keywords": ["AI", "LLM", "模型", "自动", "智能", "生成", "hazop_expert"],
+      "concern": "AI辅助HAZOP容易产生泛化问题或幻觉；专家应把AI输出当作待核查问题池，而不是会议结论。",
+      "questions": [
+        "每条AI生成问题是否能追溯到具体文件、节点、设备、导向词或明确资料缺口？",
+        "是否安排了反驳复核：删除不适用问题、合并重复问题、标记被设计文件否定的问题？",
+        "AI没有读取的CAD、扫描PDF、厂家包、会议澄清和经验反馈是否单独列入人工复核清单？"
+      ],
+      "requested_evidence": ["AI输出JSON", "证据摘录", "人工复核记录", "未解析文件清单", "会议澄清记录"]
+    },
+    {
+      "id": "LNG-SHIPSHORE-001",
+      "topic": "LNG船岸联锁、通信和紧急释放",
+      "priority": "critical",
+      "signals": ["lng", "marine_transfer"],
+      "guidewords": ["Link failure", "Wrong sequence", "Emergency release"],
+      "any_keywords": ["ship-shore", "ship shore", "SSL", "loading arm", "marine loading arm", "emergency release", "ERS", "ESD link", "船岸", "装卸臂", "紧急释放", "码头"],
+      "concern": "LNG卸船/装船的船岸ESD链路、通信丢失、装卸臂紧急释放和阀门关闭时序若不一致，可能导致泄漏、液锤或错误隔离。",
+      "questions": [
+        "船岸链路失效、通信中断、ESD-1/ESD-2触发、装卸臂ERS动作和返气切断的时序是否与P&ID、C&E和操作程序一致？",
+        "装卸臂位移、船舶漂移、未预冷、误开阀、返气不足和靠离泊异常是否分别进入HAZOP节点？",
+        "船岸联锁测试、旁路/屏蔽管理、接口责任边界和复位条件是否明确？"
+      ],
+      "requested_evidence": ["船岸接口文件", "ESD链路/C&E", "装卸臂ERS资料", "码头操作程序", "联锁测试记录"]
+    },
+    {
+      "id": "ICS-CYBER-001",
+      "topic": "控制系统网络安全和远程操作",
+      "priority": "medium",
+      "signals": ["digital_control"],
+      "guidewords": ["Unauthorized action", "Loss of control", "Bad data"],
+      "any_keywords": ["cyber", "network security", "DCS", "PLC", "remote access", "historian", "网络安全", "远程访问", "控制系统", "工程师站"],
+      "concern": "DCS/SIS/PLC远程访问、工程师站修改、时钟/通信异常和坏数据可能造成错误动作、拒动或误导操作员。",
+      "questions": [
+        "DCS/SIS/FGS/PLC之间的通信失败、错误数据、时间同步异常和网络隔离失效是否被作为偏离原因考虑？",
+        "远程访问、工程师站下载、逻辑修改、报警屏蔽和联锁旁路是否纳入MOC、权限和审计管理？",
+        "网络安全事件下是否仍能保持ESD、FGS、手动停车、现场隔离和应急通信的最小安全功能？"
+      ],
+      "requested_evidence": ["控制系统架构", "网络安全分区", "远程访问制度", "逻辑修改/MOC记录", "SIS/FGS独立性说明"]
+    },
+    {
+      "id": "HUMAN-HAZOP-WORKSHEET-001",
+      "topic": "人类专家HAZOP记录表完整性",
+      "priority": "medium",
+      "guidewords": ["Worksheet quality", "Node intent", "Traceability"],
+      "any_keywords": ["HAZOP记录", "分析记录表", "节点描述", "设计意图", "图号", "偏差", "引导词", "固有风险", "残余风险", "建议措施"],
+      "concern": "成熟人类HAZOP报告会先定义节点、节点描述、设计意图、图号、会议信息和参与专业，再逐行记录偏差、原因、后果、保护措施、固有/残余风险、建议和责任方。",
+      "questions": [
+        "本次设计包是否已经按节点形成HAZOP记录表？每个节点是否有节点描述、设计意图、图号、分析对象和适用工况？",
+        "每条偏差是否同时给出原因、后果、已有保护措施、固有风险、残余风险、建议措施和责任方？",
+        "AI生成的问题能否映射到人类HAZOP记录表字段，而不是只停留在泛泛提醒？"
+      ],
+      "requested_evidence": ["HAZOP记录表", "节点图", "P&ID图号清单", "会议记录", "行动项台账"]
+    },
+    {
+      "id": "HUMAN-HIGH-RISK-001",
+      "topic": "高风险和复杂剧情单独汇总",
+      "priority": "medium",
+      "guidewords": ["High-risk scenario", "Complex scenario"],
+      "any_keywords": ["高风险", "复杂剧情", "III", "IV", "high risk", "complex scenario", "固有风险", "风险等级"],
+      "concern": "人类专家报告通常把高风险和复杂剧情从完整worksheet中单独抽出，便于参会专家集中复核后果、保护层和建议措施。",
+      "questions": [
+        "固有风险等级为III/IV或后果复杂的场景是否已单独汇总，供专家会前重点复核？",
+        "高风险汇总是否包含节点、分析对象、原因、后果、严重性、可能性和风险等级，而不是只列标题？",
+        "这些场景的残余风险、保护措施可信度和是否进入SIL/LOPA是否有明确追踪？"
+      ],
+      "requested_evidence": ["高风险和复杂剧情汇总表", "完整HAZOP记录表", "SIL/LOPA筛选依据", "行动项关闭证据"]
+    },
+    {
+      "id": "SIS-TRACE-001",
+      "topic": "SIS因果图覆盖与HAZOP/SIL追踪",
+      "priority": "critical",
+      "guidewords": ["Missing SIF", "Traceability gap", "New shutdown valve"],
+      "any_keywords": ["SIS", "因果图", "因果表", "联锁", "SIL定级", "SIF", "新增", "切断阀", "ESD", "XV", "I-", "安全仪表功能"],
+      "concern": "人类审查意见中特别关注SIS因果图是否进入HAZOP、重要紧急切断阀是否补做HAZOP和SIL定级；这是扩建项目最容易漏项的闭环问题。",
+      "questions": [
+        "所有SIS/C&E因果图中的触发原因、联锁号、动作对象、复位方式和SIL等级是否都能追溯到HAZOP场景？",
+        "模型审查、60%/90%设计、业主审查或厂家包新增的重要ESD/XV/SDV阀是否逐项补做HAZOP和SIL定级筛选？",
+        "HAZOP记录、SIL定级记录、因果矩阵和P&ID上的仪表位号/阀位是否一致？"
+      ],
+      "requested_evidence": ["SIS因果图", "C&E矩阵", "SIL定级记录表", "HAZOP记录表", "新增/变更阀门清单", "P&ID"]
+    },
+    {
+      "id": "INTERFACE-ACCIDENT-001",
+      "topic": "外部接口和第三方事故影响",
+      "priority": "high",
+      "guidewords": ["Interface impact", "External accident", "Shared system"],
+      "any_keywords": ["界区", "界面", "接口", "第三方", "寰球", "事故影响", "A2码头", "协鑫", "中石油", "共用", "shared", "interface"],
+      "concern": "人类审查意见会要求补充相邻工程、第三方设计包或共用码头事故对本项目的影响，尤其是共用卸船、返气、切断和BOG路径。",
+      "questions": [
+        "第三方或相邻单元事故是否可能通过共用管线、返气线、卸船臂、ESD链路、BOG系统或公用工程影响本项目？",
+        "界区阀组、责任边界、联锁边界、操作通知和异常切换程序是否在HAZOP中独立分析？",
+        "第三方HAZOP/SIL报告中与本项目相关的事故场景是否已摘录并映射到本项目节点？"
+      ],
+      "requested_evidence": ["界面协议", "第三方HAZOP/SIL摘要", "共用系统P&ID", "界区阀清单", "操作切换程序"]
+    },
+    {
+      "id": "LNG-BYPASS-LIQUID-HAMMER-001",
+      "topic": "单向阀旁路误开、回流和液击",
+      "priority": "high",
+      "signals": ["lng"],
+      "guidewords": ["Reverse flow", "Wrong valve position", "Liquid hammer"],
+      "any_keywords": ["单向阀", "止回阀", "旁路", "手操阀", "误打开", "回流", "液击", "高点", "check valve", "bypass", "liquid hammer"],
+      "concern": "人类专家建议特别关注LNG卸船/输送时单向阀旁路误开造成自流回流、高点气相空间和再次输送液击。",
+      "questions": [
+        "单向阀或止回阀旁路在卸船、再启动、预冷和切换期间是否可能误开？是否需要锁闭、挂牌、联锁或程序限制？",
+        "回流后高点气相空间、再次输送液击、管线震动和财产损失/泄漏后果是否已纳入HAZOP？",
+        "仅靠操作规程是否足够，还是需要增加阀位指示、开关限制、互锁或物理锁定？"
+      ],
+      "requested_evidence": ["P&ID", "单向阀/旁路清单", "操作程序", "阀位/锁定措施", "液击或瞬态分析"]
+    },
+    {
+      "id": "LNG-PRECOOL-N2-001",
+      "topic": "液氮预冷进入LNG管线",
+      "priority": "medium",
+      "signals": ["lng"],
+      "guidewords": ["Wrong material", "Low temperature", "Commissioning"],
+      "any_keywords": ["液氮", "氮气", "预冷", "低温液氮", "LN2", "nitrogen precooling", "commissioning"],
+      "concern": "人类专家报告把液氮预冷误入LNG管线作为可讨论场景，即使最终因项目实际采用LNG预冷而关闭，也应在会前确认预冷介质和隔离措施。",
+      "questions": [
+        "预冷介质到底是LNG、液氮还是气氮？不同阶段是否可能发生预冷介质切换或临时接入？",
+        "若使用液氮或氮气预冷，是否有防止低温液氮进入不适用管线、造成低温破裂或材料损伤的措施？",
+        "若该场景不适用，关闭理由是否写清楚并有设计/操作依据？"
+      ],
+      "requested_evidence": ["预冷方案", "临时接管图", "操作程序", "低温材料边界", "关闭理由记录"]
+    },
+    {
+      "id": "LNG-BLIND-SPOOL-PURGE-001",
+      "topic": "短接/盲法兰切换和置换确认",
+      "priority": "medium",
+      "signals": ["lng"],
+      "guidewords": ["Maintenance", "Purge failure", "Wrong isolation"],
+      "any_keywords": ["短接", "盲法兰", "盲板", "置换", "吹扫", "氮气充压", "拆卸", "隔离", "spool", "blind flange", "purge"],
+      "concern": "人类专家建议把短接与盲法兰切换、拆卸前置换不充分、气液相短接盲端置换作为检维修/投产关键场景。",
+      "questions": [
+        "短接、盲板、盲法兰或临时管段切换前，气相和液相盲端是否都有明确的氮气充压置换、检测和确认步骤？",
+        "拆卸盲板或短接时是否存在残余可燃气、低温液体、夹带液或误隔离导致的泄漏/火灾风险？",
+        "置换合格标准、检测点、责任人、复位状态和禁止同时打开的阀位是否明确？"
+      ],
+      "requested_evidence": ["检维修隔离方案", "盲板表", "置换/吹扫程序", "气体检测记录", "投产切换方案"]
+    },
+    {
+      "id": "LNG-VAPOR-RETURN-INTERLOCK-001",
+      "topic": "气相返回阀误开和互锁",
+      "priority": "high",
+      "signals": ["lng"],
+      "guidewords": ["Wrong route", "High pressure", "Cross-connection"],
+      "any_keywords": ["气相返回", "返气", "回船BOG", "同时打开", "不允许同时打开", "压控阀", "温控阀", "vapor return", "return gas"],
+      "concern": "人类建议中对气相返回阀同时打开、绕过压力/温度控制直接返船、排净工况串气等问题采用互锁或不允许同时打开措施。",
+      "questions": [
+        "气相返回、排净、分液和返船路径中是否存在两个阀门同时打开导致绕过压控/温控或工况串通的可能？",
+        "互斥阀位是否只靠操作程序，还是有DCS/SIS互锁、阀位确认、报警或机械限制？",
+        "排净工况和分液工况是否保持流程独立，避免气相窜入卸船气相返回臂或船舱超压/低压？"
+      ],
+      "requested_evidence": ["P&ID", "气相返回控制哲学", "C&E矩阵", "阀位互锁逻辑", "操作程序"]
+    },
+    {
+      "id": "VALVE-FAILSAFE-001",
+      "topic": "气动/电动阀故障安全位标注",
+      "priority": "medium",
+      "guidewords": ["Fail safe", "Loss of air", "Wrong valve state"],
+      "any_keywords": ["故障状态", "故障位", "FC", "FO", "FL", "停风", "气动阀", "fail close", "fail open", "fail last"],
+      "concern": "人类专家建议要求P&ID标注关键气动阀故障安全位；停风时阀门故障位设置错误可能导致超压、串料或泄漏。",
+      "questions": [
+        "关键气动阀/电动阀的FC/FO/FL故障位是否在P&ID、阀门表和C&E矩阵中一致标注？",
+        "仪表风、电源或控制信号丢失时，阀位是否使系统进入安全状态，而不是造成超压、低温冲击、串料或误隔离？",
+        "新增阀门、厂家包阀门和第三方接口阀是否也纳入故障位核查？"
+      ],
+      "requested_evidence": ["P&ID", "阀门表", "C&E矩阵", "仪表风失效分析", "厂家阀门数据表"]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+P&ID文本摘录：
+
+LNG unloading line from jetty to tank TK-101. ESDV-101 and XV-102 provide isolation.
+LNG transfer pump P-101A/B sends LNG to vaporizer E-201. Minimum flow recycle is shown.
+BOG compressor K-301A/B takes vapor from TK-101 and sends to recondenser.
+PSV-201 protects vaporizer outlet. Thermal relief valves are required for blocked-in LNG liquid sections.
+Gas detector GD-101 and flame detector FD-101 are installed near unloading area.

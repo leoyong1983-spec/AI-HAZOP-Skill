@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI HAZOP Expert"
+  short_description: "Review design packages and draft HAZOP expert questions."
+  default_prompt: "Review a design-file folder and produce HAZOP participating-expert questions, evidence gaps, and requested clarifications."
