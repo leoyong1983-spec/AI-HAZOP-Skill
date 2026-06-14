@@ -1,4 +1,4 @@
 interface:
   display_name: "AI HAZOP Expert"
-  short_description: "Review design packages and draft HAZOP expert questions."
-  default_prompt: "Review a design-file folder and produce HAZOP participating-expert questions, evidence gaps, and requested clarifications."
+  short_description: "生成中文逐张P&ID HAZOP专家预审工作台。"
+  default_prompt: "使用 $ai-hazop-skill 审查设计文件夹，PFD仅作为项目整体理解基础，默认忽略含“已建”的图纸，并生成中文逐张P&ID专家预审工作台，包含原图预览、拓扑证据和本图问题。"

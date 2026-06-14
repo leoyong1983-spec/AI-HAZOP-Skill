@@ -2,44 +2,59 @@
   "version": "0.3.0",
   "practice_sources": [
     {
-      "label": "OSHA 29 CFR 1910.119(e) Process Hazard Analysis",
+      "label": "OSHA 29 CFR 1910.119(e) 工艺危害分析要求",
       "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.119",
-      "borrowed": "PHA should address prior incidents, engineering/administrative controls, consequences of control failures, facility siting, human factors, and qualitative evaluation of safeguard effects."
+      "borrowed": "借鉴点：PHA应覆盖既往事故、工程和管理控制、控制失效后果、设施选址、人因以及保护措施效果的定性评价。"
     },
     {
-      "label": "EPA 40 CFR 68.67 Process Hazard Analysis",
+      "label": "EPA 40 CFR 68.67 工艺危害分析要求",
       "url": "https://www.ecfr.gov/current/title-40/chapter-I/subchapter-C/part-68/subpart-D/section-68.67",
-      "borrowed": "PHA should cover natural hazards, power loss, siting, human factors, safer technology alternatives, and prompt resolution/documentation of findings."
+      "borrowed": "借鉴点：PHA应覆盖自然灾害、失电、选址、人因、本质安全替代方案，并及时处理和记录发现项。"
     },
     {
-      "label": "IEC 61882:2016 HAZOP application guide",
+      "label": "IEC 61882:2016 HAZOP应用指南",
       "url": "https://webstore.iec.ch/en/publication/24321",
-      "borrowed": "Use systematic guideword review with explicit preparation, examination, documentation, and follow-up boundaries."
+      "borrowed": "借鉴点：采用系统化导向词审查，并明确准备、审查、记录和后续跟踪边界。"
     },
     {
-      "label": "PHMSA 49 CFR Part 193 LNG facilities",
+      "label": "PHMSA 49 CFR Part 193 LNG设施要求",
       "url": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-I/subchapter-D/part-193",
-      "borrowed": "For LNG, emphasize siting, impoundment, control systems, emergency shutdown, fire protection, and operating/maintenance procedures."
+      "borrowed": "借鉴点：LNG项目应重点关注选址、围护/围堰、控制系统、紧急停车、消防保护以及操作维护程序。"
     },
     {
-      "label": "SIGTTO LNG ship-shore ESD linked systems guidance",
+      "label": "GTT GST陆上薄膜LNG储罐公开资料",
+      "url": "https://www.gtt.fr/applications/land-storage",
+      "borrowed": "借鉴点：薄膜罐审查不能只看常规储罐P&ID，还应追问主膜/次屏障、绝热空间、惰化、泄漏监测、温度监测和混凝土外罐边界。"
+    },
+    {
+      "label": "SIGTTO绝热空间气体浓度与船岸安全资料",
       "url": "https://www.sigtto.org/",
-      "borrowed": "For LNG transfer, explicitly check ship-shore link, ESD timing, emergency release, communication loss, and testing/override management."
+      "borrowed": "借鉴点：LNG低温围护系统的绝热/围护空间需要关注气体浓度监测、惰化、报警、处置程序和ESD/接口测试。"
     },
     {
-      "label": "AI-assisted HAZOP research and preHAZOP practice",
-      "url": "https://github.com/TUDoAD/preHAZOP",
-      "borrowed": "Keep AI output evidence-linked, node/design-intent oriented, and subject to human expert challenge rather than automatic acceptance."
-    },
-    {
-      "label": "Safety Science 2026 LLM HAZOP evaluation",
-      "url": "https://www.sciencedirect.com/science/article/pii/S0925753525002644",
-      "borrowed": "Treat LLM HAZOP output as a supportive draft because scenario validity can be limited and generated safeguards can over-weight procedural measures."
-    },
-    {
-      "label": "Local RuDong LNG human HAZOP/SIL report package",
+      "label": "本地粤东LNG接收站2023可研和方案资料",
       "url": "",
-      "borrowed": "Learn reusable expert-report patterns: node-based worksheet structure, high-risk scenario summary, review-comment closure, HAZOP-to-SIL traceability, C&E coverage, interface accident impact, and engineering-action quality."
+      "borrowed": "借鉴点：本项目历史资料显示需重点追问4座27万方/22万方储罐方案、薄膜罐与全容罐选型、低压泵/装船泵、BOG再冷凝、高压泵、ORV、火炬放空、一期二期互联互通、SIS/GDS/FAS接口和码头卸船能力。"
+    },
+    {
+      "label": "SIGTTO LNG船岸ESD联锁系统指南",
+      "url": "https://www.sigtto.org/",
+      "borrowed": "借鉴点：LNG转输应明确核查船岸链路、ESD时序、紧急释放、通信丢失以及测试/旁路管理。"
+    },
+    {
+      "label": "AI辅助HAZOP研究与preHAZOP实践",
+      "url": "https://github.com/TUDoAD/preHAZOP",
+      "borrowed": "借鉴点：AI输出必须绑定证据、面向节点和设计意图，并接受人类专家质疑，而不能自动采信。"
+    },
+    {
+      "label": "Safety Science 2026 大语言模型HAZOP评估论文",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0925753525002644",
+      "borrowed": "借鉴点：大语言模型HAZOP输出应作为辅助草稿；其场景有效性可能受限，且生成的保护措施可能过度偏向程序性措施。"
+    },
+    {
+      "label": "本地如东LNG人类专家HAZOP/SIL报告包",
+      "url": "",
+      "borrowed": "借鉴点：学习可复用的人类专家报告模式，包括基于节点的记录表结构、高风险场景汇总、审查意见关闭、HAZOP到SIL追踪、C&E覆盖、接口事故影响和工程行动项质量。"
     }
   ],
   "required_document_types": [
@@ -610,6 +625,186 @@
         "排净工况和分液工况是否保持流程独立，避免气相窜入卸船气相返回臂或船舱超压/低压？"
       ],
       "requested_evidence": ["P&ID", "气相返回控制哲学", "C&E矩阵", "阀位互锁逻辑", "操作程序"]
+    },
+    {
+      "id": "LNG-MEMBRANE-CONTAINMENT-001",
+      "topic": "薄膜罐主膜、次屏障和绝热空间泄漏监测",
+      "priority": "critical",
+      "signals": ["lng"],
+      "guidewords": ["Containment breach", "Leak detection", "Insulation space"],
+      "any_keywords": ["薄膜罐", "薄膜", "膜罐", "主膜", "次屏障", "绝热空间", "保冷空间", "绝热", "保冷", "GST", "GTT", "氮气缓冲罐", "V-C070"],
+      "concern": "薄膜罐的重大风险不只在罐顶管口超压，还在主膜泄漏、次屏障承接能力、绝热空间可燃气积聚、局部冷点、混凝土外罐受冷和长期监测处置边界。若P&ID只给出氮气或放空接口而未体现监测和处置逻辑，HAZOP会上容易漏掉真正的罐型特有场景。",
+      "questions": [
+        "本图涉及薄膜罐、氮气缓冲罐或绝热/保冷空间时，主膜泄漏后由哪些可燃气、氧含量、压力、温度或冷点测点首先发现？报警、联锁和人工确认时限是什么？",
+        "次屏障/绝热空间接收泄漏后，氮气惰化、排放去向、隔离边界、降液位或停输策略是否在P&ID、C&E和操作程序中一致？",
+        "混凝土外罐、罐底、吊顶、热角保护、穿罐管口和保冷材料的低温保护是否有独立证据，而不是仅假定薄膜罐厂家包解决？"
+      ],
+      "requested_evidence": ["薄膜罐厂家设计说明", "罐表/仪表索引", "绝热空间气体和温度监测布置", "C&E矩阵", "泄漏处置程序", "罐型HAZOP节点划分"]
+    },
+    {
+      "id": "LNG-MEMBRANE-NITROGEN-001",
+      "topic": "薄膜罐氮气惰化、缓冲罐和差压控制",
+      "priority": "high",
+      "signals": ["lng"],
+      "guidewords": ["No nitrogen", "High pressure", "Wrong purge"],
+      "any_keywords": ["氮气吹扫", "氮气缓冲罐", "高纯氮气", "氮封", "惰化", "绝热空间", "保冷空间", "氧含量", "O2", "可燃气", "GDS", "FGS"],
+      "concern": "薄膜罐氮气系统既是惰化/置换系统，也是泄漏诊断和保护边界的一部分。氮气失效、调压阀失效、差压异常、排放受阻或误吹扫可能掩盖主膜泄漏、造成可燃混合气或损伤薄膜/绝热系统。",
+      "questions": [
+        "氮气缓冲罐、调压、止回、排放和分配支路是否能保证绝热空间在所有运行/停车/检修状态下维持合格惰化？",
+        "氮气低压、高压、氧含量高、可燃气高、差压异常和排放背压高分别触发哪些报警/联锁/操作动作？",
+        "氮气系统与仪表空气、GDS/FGS、SIS、放空系统和厂家罐表之间的接口责任是否清楚？"
+      ],
+      "requested_evidence": ["氮气P&ID", "薄膜罐氮气需求量计算", "报警/联锁设定值", "氧含量/可燃气检测布置", "氮气失效处置程序"]
+    },
+    {
+      "id": "LNG-TANK-ROLLOVER-LTD-001",
+      "topic": "LNG储罐分层翻滚和LTD监测",
+      "priority": "critical",
+      "signals": ["lng"],
+      "guidewords": ["Rollover", "Stratification", "Composition change"],
+      "any_keywords": ["LNG储罐", "翻滚", "分层", "密度", "LTD", "温度剖面", "液位", "倒罐", "多气源", "返输", "顶部进液", "底部进液"],
+      "concern": "多气源、不同密度LNG、长期储存、倒罐、装船/返输和接收负荷变化会造成储罐分层；若LTD/密度温度剖面、进液方式和循环混合策略不清，翻滚可能导致BOG突增、储罐超压和放空/火炬超负荷。",
+      "questions": [
+        "本罐P&ID是否能追溯顶部/底部进液、倒罐、低压泵循环、装船返输和不同气源接收策略？哪些工况会增加分层风险？",
+        "LTD、液位、温度、压力、BOG流量和组分/密度监测是否足以发现分层趋势？报警阈值、操作响应和限制接收速率的依据是什么？",
+        "发生翻滚导致BOG突增时，BOG压缩、再冷凝、放空/火炬和ESD策略是否有容量和时序校核？"
+      ],
+      "requested_evidence": ["LTD/罐表资料", "储罐操作手册", "LNG组分/密度包络", "进液/倒罐策略", "BOG容量校核", "C&E矩阵"]
+    },
+    {
+      "id": "LNG-IN-TANK-PUMP-COLUMN-001",
+      "topic": "罐内低压泵、泵井和最小液位保护",
+      "priority": "critical",
+      "signals": ["lng"],
+      "guidewords": ["No flow", "Cavitation", "Low level"],
+      "any_keywords": ["罐内泵", "低压泵", "潜液泵", "低压输送泵", "低压泵系统", "泵井", "最小液位", "NPSH", "P-C080", "装船泵"],
+      "concern": "罐内泵和泵井场景经常跨越储罐、泵出口、循环/最小流量、装船或高压外输接口。最小淹没、气蚀、泵柱排气、出口封闭液段和停泵顺序若未讲清，会导致无流、液击、低温泄漏或泵损坏。",
+      "questions": [
+        "低液位、低低液位、泵井气相夹带、预冷不充分、出口阀关断和最小流量不足时，泵保护和ESD动作是否明确？",
+        "泵出口到低压总管、装船泵、高压泵入口或回罐线之间是否存在封闭低温液段？TSV/放空/回流路径是否逐段覆盖？",
+        "罐内泵切换、备用泵启动和装船/外输模式切换是否有阀位互锁，避免反流、液击或误送至非目标系统？"
+      ],
+      "requested_evidence": ["罐内泵数据表", "泵保护逻辑", "低液位/低低液位设定", "最小流量/回流方案", "TSV清单", "操作程序"]
+    },
+    {
+      "id": "LNG-BOG-RECONDENSER-PRESSURE-001",
+      "topic": "BOG压缩、再冷凝和储罐压力联动",
+      "priority": "critical",
+      "signals": ["lng"],
+      "guidewords": ["High pressure", "Low pressure", "Capacity mismatch"],
+      "any_keywords": ["BOG", "再冷凝", "低温压缩机", "高压压缩机", "中压BOG", "低压BOG", "储罐压力", "C-C120", "再冷凝器"],
+      "concern": "卸船、装船、倒罐、翻滚、低压泵运行和高压外输波动会同时改变BOG负荷。若低压BOG、中压BOG、再冷凝器、高压压缩机、火炬和储罐压力控制之间没有清晰优先级，可能导致储罐超压/负压、压缩机喘振或放空超负荷。",
+      "questions": [
+        "卸船高峰、翻滚BOG突增、高压泵跳车、外输受限、再冷凝器液位异常和压缩机停机时，储罐压力控制链条先后动作是什么？",
+        "一、二期或多套BOG系统互联时，低压BOG是否保持各自处理？中压BOG跨接是否会造成压力控制耦合、返流或负荷抢占？",
+        "BOG放空/火炬是否只作为最终保护层？正常控制、报警、SIS/ESD和操作响应如何防止频繁放空？"
+      ],
+      "requested_evidence": ["BOG控制哲学", "BOG容量计算", "再冷凝器P&ID", "储罐压力控制逻辑", "压缩机保护逻辑", "火炬负荷校核"]
+    },
+    {
+      "id": "LNG-INTERCONNECT-MODE-001",
+      "topic": "一期二期互联互通模式、阀位和水力边界",
+      "priority": "critical",
+      "signals": ["lng", "brownfield"],
+      "guidewords": ["Wrong route", "Reverse flow", "Mode conflict"],
+      "any_keywords": ["互联互通", "一期", "二期", "跨接", "倒罐", "外输总管", "卸料管", "循环保冷", "42", "26", "已建", "新建"],
+      "concern": "扩建接入既有接收站时，互联互通往往带来模式冲突：卸船到任意罐、低压外输互送、BOG跨接、装船/返输、ORV互联和公用工程共用。若水力计算、阀位互锁和操作边界不清，可能造成错误路径、液击、超压、储罐压差扰动或影响既有装置安全运行。",
+      "questions": [
+        "本图所示新老系统接口在卸船、倒罐、低压外输、BOG处理、装船和停运保冷模式下哪些阀门必须互斥？",
+        "长距离跨接管线的压降、停滞低温液体热膨胀、保冷循环、排净和放空是否逐段覆盖？",
+        "一期系统事故、检修或ESD时，二期是否会通过共用管线、BOG、氮气、仪表风、消防或控制系统被连带影响？"
+      ],
+      "requested_evidence": ["互联互通方案", "水力/压降计算", "模式矩阵", "阀位互锁表", "C&E矩阵", "新老界区协议"]
+    },
+    {
+      "id": "LNG-JETTY-LOADING-UNLOADING-001",
+      "topic": "卸船、装船、返气和循环保冷工况互斥",
+      "priority": "critical",
+      "signals": ["lng"],
+      "guidewords": ["Wrong sequence", "ESD", "Vapor return"],
+      "any_keywords": ["卸船", "装船", "返气", "气体返回", "回船BOG", "卸料臂", "装船泵", "船岸", "循环保冷", "ESD", "ERS"],
+      "concern": "LNG码头工况不是单一流向：卸船、装船、返气、循环保冷、排净、惰化和ESD复位之间若缺少互斥逻辑，会发生错开阀、液击、船舱压力异常、装卸臂泄漏或紧急释放时序不一致。",
+      "questions": [
+        "卸船、装船、循环保冷、返气、排净和吹扫是否形成清晰模式矩阵？哪些阀门和泵不能同时运行？",
+        "船岸ESD-1/ESD-2、装卸臂ERS、船舱高/低压、返气不足、保冷未完成和通信丢失的动作顺序是否和P&ID一致？",
+        "装船泵或卸船臂切换时，是否校核液击、反流、低温封闭液段和返气路径被误隔离？"
+      ],
+      "requested_evidence": ["码头操作程序", "船岸接口文件", "装卸臂资料", "ESD/C&E矩阵", "模式矩阵", "液击分析"]
+    },
+    {
+      "id": "LNG-RELIEF-FLARE-CRYO-001",
+      "topic": "低温LNG/BOG泄放、TSV和火炬放空能力",
+      "priority": "high",
+      "signals": ["lng", "cryogenic"],
+      "guidewords": ["Relief", "Thermal expansion", "Cold vent"],
+      "any_keywords": ["火炬", "放空", "低压放空", "高压放空", "安全阀", "PSV", "PRV", "TSV", "热膨胀", "低温放空", "封闭液段"],
+      "concern": "LNG接收站低温系统存在大量可能被隔离的液段，且BOG、低温气、两相或夹液进入火炬/放空系统会带来材质、背压、低温收缩、分液和辐射影响。只在设备上标PSV不足以证明泄放路径有效。",
+      "questions": [
+        "本图中每段可能被双阀隔离的低温液体、预冷支路、泵出口和小口径旁路是否设置TSV或可靠回流/放空路径？",
+        "低温BOG、两相或夹液泄放进入低压/高压放空系统时，分液罐、火炬总管、密封和下游材质是否满足最低温度和背压要求？",
+        "火灾、翻滚BOG、压缩机跳车、再冷凝器失效和外输受限是否汇总进入火炬负荷与辐射/扩散校核？"
+      ],
+      "requested_evidence": ["泄放负荷计算", "TSV清单", "火炬水力/背压计算", "放空分液罐数据表", "低温材质边界", "热辐射/扩散报告"]
+    },
+    {
+      "id": "LNG-COMMISSIONING-COOLDOWN-DRYING-001",
+      "topic": "投产预冷、干燥、置换和冷紧",
+      "priority": "high",
+      "signals": ["lng", "cryogenic"],
+      "guidewords": ["Startup", "Wrong medium", "Thermal shock"],
+      "any_keywords": ["预冷", "干燥", "置换", "吹扫", "氮气", "冷紧", "投产", "开车", "临时管线", "露点", "氧含量"],
+      "concern": "LNG薄膜罐、低温管线和泵系统在投产阶段比稳态更脆弱。干燥露点、氧含量、氮气置换、冷却速率、临时盲板/短接和冷紧复位不清，会造成水冰堵、低温冲击、可燃混合气或遗留错误阀位。",
+      "questions": [
+        "预冷介质、冷却速率、分段冷紧、干燥露点、氧含量和可燃气合格标准是否明确到系统/管段？",
+        "临时管线、盲板、短接、氮气接入口和排放点是否在P&ID或投产图中受控，投产后如何复位验证？",
+        "薄膜罐氮气空间、泵井、装船/卸船支路、BOG和火炬放空在预冷期间是否有不同于正常运行的报警/联锁旁路？"
+      ],
+      "requested_evidence": ["投产预冷方案", "干燥/置换记录", "临时管线图", "盲板表", "冷紧方案", "联锁旁路清单"]
+    },
+    {
+      "id": "LNG-ORV-SEAWATER-001",
+      "topic": "ORV海水、冷排水和气化出口低温风险",
+      "priority": "high",
+      "signals": ["lng"],
+      "guidewords": ["Less heat", "Low temperature", "Environmental interface"],
+      "any_keywords": ["ORV", "开架式", "气化器", "海水", "海水泵", "加氯", "冷排水", "气化出口", "低温外输"],
+      "concern": "ORV把海水、公用工程、外输气温度和环保排放耦合在一起。海水流量不足、加氯异常、海生物堵塞、低温出站或气化器结冰可能影响长输管道、计量和接收站连续运行。",
+      "questions": [
+        "海水泵跳车、滤网堵塞、加氯异常、低温海况或单台ORV切换时，气化出口温度低低报警/联锁是否足以保护下游管道？",
+        "ORV进出口隔离后是否存在LNG或低温气体封闭段？排净、放空、预冷和检维修置换如何处理？",
+        "冷排水扩散、海水取排水限制和环保约束是否会成为HAZOP偏离原因，影响外输负荷或应急保供能力？"
+      ],
+      "requested_evidence": ["ORV P&ID", "海水系统P&ID", "出口温度联锁", "海水泵/滤网资料", "冷排水扩散研究", "操作程序"]
+    },
+    {
+      "id": "LNG-SPILL-IMPOUNDMENT-QRA-001",
+      "topic": "LNG泄漏收集、围堰/集液池和扩散热辐射",
+      "priority": "high",
+      "signals": ["lng", "cryogenic"],
+      "guidewords": ["Loss of containment", "Escalation", "Drainage"],
+      "any_keywords": ["集液池", "围堰", "热辐射", "扩散", "可燃云", "低温泄漏", "排液", "雨水", "事故后果", "PHAST"],
+      "concern": "LNG泄漏后果取决于泄漏量、隔离时间、收集面积、围堰/集液池、雨水排放隔离、地形和风向。若P&ID未能追溯到事故后果假设，专家应追问泄漏收集是否支持热辐射/扩散计算边界。",
+      "questions": [
+        "本图中泵出口、装船/卸船、低温保冷循环、罐区管口和集液池之间的泄漏收集路径是否与后果计算一致？",
+        "雨水阀、排液阀、集液池液位、可燃气/低温探测和消防响应是否能防止LNG进入非设计排水系统？",
+        "热辐射/扩散报告采用的隔离时间、泄漏孔径、风速稳定度、集液池面积和人员暴露点是否与当前P&ID版本一致？"
+      ],
+      "requested_evidence": ["热辐射/扩散报告", "总图/竖向/排水图", "集液池容量计算", "F&G布置", "雨水/事故排液P&ID", "隔离时间假设"]
+    },
+    {
+      "id": "LNG-DIGITAL-SIS-GDS-INTEGRATION-001",
+      "topic": "SIS、GDS/FAS、DCS和已建系统接口",
+      "priority": "high",
+      "signals": ["lng", "digital_control"],
+      "guidewords": ["Interface failure", "Bad signal", "Common cause"],
+      "any_keywords": ["SIS", "GDS", "FAS", "FGS", "DCS", "硬线", "交换机", "辅操台", "安全联锁", "国产系统", "已建控制系统"],
+      "concern": "扩建项目控制系统常出现新老SIS/GDS/FAS/DCS接口、硬线与通信混用、系统国产化替换、工程师站和辅操台责任边界不清。接口失效可能同时影响探测、报警、ESD和操作员响应。",
+      "questions": [
+        "新增SIS/GDS/FAS/DCS与已建系统之间哪些信号走硬线，哪些走通信？通信失败、交换机故障或时间同步异常时是否进入安全状态？",
+        "可燃气/低温泄漏探测是否独立于DCS，并能触发正确报警、联锁、声光和ESD分区动作？",
+        "逻辑修改、旁路屏蔽、系统国产化替换、工程师站权限和联锁测试是否纳入MOC/PSSR与HAZOP行动项闭环？"
+      ],
+      "requested_evidence": ["控制系统架构", "I/O清单", "C&E矩阵", "GDS/FAS设计说明", "SIS独立性说明", "联锁测试和旁路管理程序"]
     },
     {
       "id": "VALVE-FAILSAFE-001",

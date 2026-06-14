@@ -8,3 +8,4 @@ hazop_review_output/
 venv/
 *.tmp
 ~$*
+terminology_inbox.md
